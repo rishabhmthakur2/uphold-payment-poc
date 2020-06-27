@@ -24,7 +24,6 @@ app.get('/loggedIn', async (req, res) => {
     }, (err, response)=>{
         return res.send(response.body);
     });
-    res.send("Completed");
 });
 
 app.listen(process.env.PORT || PORT, () => {
