@@ -24,9 +24,10 @@ app.get('/loggedIn', async (req, res) => {
         }
     }, (err, response)=>{
         authToken = response.body.access_token;
-        return res.send("Linking Completed:\n" + response.body.access_token);
+        return res.send("Linking Completed:\n" + authToken);
     });
 });
+
 
 
 app.listen(process.env.PORT || PORT, () => {
