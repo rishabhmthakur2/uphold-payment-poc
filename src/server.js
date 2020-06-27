@@ -14,7 +14,7 @@ app.use(express.static(path.join(__dirname, publicPath)));
 
 app.get('/loggedIn', async (req, res) => {
     returnCode = req.query.code;
-    request.post({
+    await request.post({
         url: `https://api-sandbox.uphold.com/oauth2/token`, form: {
             client_id: client_id,
             client_secret: client_secret,
