@@ -24,7 +24,15 @@ app.get('/loggedIn', async (req, res) => {
         }
     }, (err, response)=>{
         const responseJSON = JSON.parse(response.body);
-        return res.send("Linking Completed:\n" + responseJSON.access_token);
+        authToken = responseJSON.access_token;
+    });
+    await request.get({
+        url: `https://api.uphold.com/v0/me/cards`,
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        },
+    }, (err, response)=>{
+        res.send(response.body);
     });
 });
 
