@@ -18,7 +18,7 @@ app.get('/loggedIn', async (req, res) => {
         url: `https://api-sandbox.uphold.com/oauth2/token`, form: {
             client_id: client_id,
             client_secret: client_secret,
-            code: '95eabbe9f8163757f1bcaed03f87fc5a59356ddd',
+            code: returnCode,
             grant_type: 'authorization_code'
         }
     }, (err, response)=>{
