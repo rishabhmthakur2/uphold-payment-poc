@@ -25,15 +25,16 @@ app.get('/loggedIn', async (req, res) => {
     }, (err, response)=>{
         const responseJSON = JSON.parse(response.body);
         authToken = responseJSON.access_token;
+        res.send(responseJSON);
     });
-    await request.get({
-        url: `https://api.uphold.com/v0/me/cards`,
-        headers: {
-            'Authorization': `Bearer ${authToken}`
-        },
-    }, (err, response)=>{
-        res.send(`${authToken}\n` + response.body);
-    });
+    // await request.get({
+    //     url: `https://api.uphold.com/v0/me/cards`,
+    //     headers: {
+    //         'Authorization': `Bearer ${authToken}`
+    //     },
+    // }, (err, response)=>{
+    //     res.send(`${authToken}\n` + response.body);
+    // });
 });
 
 
