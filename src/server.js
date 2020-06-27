@@ -23,8 +23,8 @@ app.get('/loggedIn', async (req, res) => {
             grant_type: 'authorization_code'
         }
     }, (err, response)=>{
-        authToken = response.body.access_token;
-        return res.send("Linking Completed:\n" + authToken);
+        const responseJSON = JSON.parse(response.body);
+        return res.send("Linking Completed:\n" + responseJSON.access_token);
     });
 });
 
