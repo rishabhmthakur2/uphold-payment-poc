@@ -9,8 +9,7 @@ app.use(express.static(path.join(__dirname, publicPath)));
 
 app.get('/loggedIn',(req, res)=>{
     const returnCode = req.query.code;
-    console.log("Test");
-    res.send('You are logged in now');
+    res.send(returnCode);
 });
 
 app.listen(process.env.PORT || PORT, ()=>{
