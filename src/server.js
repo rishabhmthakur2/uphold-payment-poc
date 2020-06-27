@@ -8,8 +8,8 @@ const publicPath = '../public'
 app.use(express.static(path.join(__dirname, publicPath)));
 
 app.get('/loggedIn',(req, res)=>{
-    const returnCode = req.params.code;
-    console.log(returnCode);
+    const returnCode = req.query.code;
+    console.log("Test");
     res.send('You are logged in now');
 });
 
