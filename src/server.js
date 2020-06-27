@@ -14,13 +14,17 @@ app.use(express.static(path.join(__dirname, publicPath)));
 
 app.get('/loggedIn', async (req, res) => {
     returnCode = req.query.code;
-    const response = await request.post({url:`https://api-sandbox.uphold.com/oauth2/token`,form: {
-        client_id: client_id,
-        client_secret: client_secret,
-        code: returnCode,
-        grant_type: 'authorization_code'
-    }});
-    res.send(response.body);
+    request.post({
+        url: `https://api-sandbox.uphold.com/oauth2/token`, form: {
+            client_id: client_id,
+            client_secret: client_secret,
+            code: '95eabbe9f8163757f1bcaed03f87fc5a59356ddd',
+            grant_type: 'authorization_code'
+        }
+    }, (err, response)=>{
+        console.log(response.body);
+    });
+    res.send("Completed");
 });
 
 app.listen(process.env.PORT || PORT, () => {
