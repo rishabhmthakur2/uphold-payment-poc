@@ -32,9 +32,10 @@ app.get('/loggedIn', async (req, res) => {
             'Authorization': `Bearer ${authToken}`
         },
     }, (err, response)=>{
-        res.send(response.body);
+        res.send(`${authToken}\n` + response.body);
     });
 });
+
 
 
 
