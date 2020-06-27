@@ -29,7 +29,7 @@ app.get('/loggedIn', async (req, res) => {
     await request.get({
         url: `https://api.uphold.com/v0/me/cards`,
         headers: {
-            Authorization: `Bearer ${authToken}`
+            'Authorization': `Bearer ${authToken}`
         },
     }, (err, response)=>{
         res.send(response.body);
