@@ -5,7 +5,7 @@ const request = require('request');
 const app = express();
 const PORT = 3000;
 const publicPath = '../public'
-const returnCode = "";
+var returnCode = "";
 const client_id = "f56ec8dd7cc31ab9f199a3c599e879aa27dfcb63";
 const client_secret = "e3849adec6208c914ab461b9ed9c2d04cbbfcf7c";
 
@@ -22,7 +22,7 @@ app.get('/loggedIn', async (req, res) => {
             grant_type: 'authorization_code'
         }
     }, (err, response)=>{
-        console.log(response.body);
+        return res.send(response.body);
     });
     res.send("Completed");
 });
