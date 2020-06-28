@@ -40,7 +40,7 @@ app.get('/getCards', (req, res) => {
     });
 });
 
-app.post('/createCard', (req, res)=>{
+app.post('/createCard', async (req, res)=>{
     const cardObject = {
         "label": req.body.label,
         "Currency": req.body.currency
