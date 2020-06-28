@@ -29,7 +29,7 @@ app.get('/loggedIn', async (req, res) => {
     });
 });
 
-app.get('/getCards', (req, res) => {
+app.get('/getCards', async (req, res) => {
     await request.get({
         url: `https://api-sandbox.uphold.com/v0/me/cards`,
         headers: {
