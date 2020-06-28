@@ -22,19 +22,39 @@ app.get('/loggedIn', async (req, res) => {
             code: returnCode,
             grant_type: 'authorization_code'
         }
-    }, (err, response)=>{
+    }, (err, response) => {
         const responseJSON = JSON.parse(response.body);
         authToken = responseJSON.access_token;
-        res.send(responseJSON);
+        res.send("Successfully authenticated");
     });
-    // await request.get({
-    //     url: `https://api.uphold.com/v0/me/cards`,
-    //     headers: {
-    //         'Authorization': `Bearer ${authToken}`
-    //     },
-    // }, (err, response)=>{
-    //     res.send(`${authToken}\n` + response.body);
-    // });
+});
+
+app.get('/getCards', (req, res) => {
+    await request.get({
+        url: `https://api-sandbox.uphold.com/v0/me/cards`,
+        headers: {
+            'Authorization': `Bearer ${authToken}`
+        },
+    }, (err, response) => {
+        res.send(response);
+    });
+});
+
+app.post('/createCard', (req, res)=>{
+    const cardObject = {
+        "label": req.body.label,
+        "Currency": req.body.currency
+    };
+    await request.post({
+        url: `https://api-sandbox.uphold.com/v0/me/cards`,
+        headers: {
+            'Authorization': `Bearer ${authToken}`,
+            'Content-Type': `application/json`
+        },
+        body: cardObject
+    }, (req, res)=>{
+        res.send(`New card created: ${res.body.id}`);
+    });
 });
 
 
