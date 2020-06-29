@@ -1,14 +1,18 @@
 const express = require('express');
 const path = require('path');
 const request = require('request');
+var bodyParser = require('body-parser')
 
 const app = express();
 const PORT = 3000;
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 const publicPath = '../public'
 var returnCode = "";
 const client_id = "f56ec8dd7cc31ab9f199a3c599e879aa27dfcb63";
 const client_secret = "e3849adec6208c914ab461b9ed9c2d04cbbfcf7c";
-var authToken = ""
+var authToken = "";
 
 app.use(express.static(path.join(__dirname, publicPath)));
 
@@ -35,7 +39,7 @@ app.get('/getCards', async (req, res) => {
             'Authorization': `Bearer ${authToken}`
         },
     }, (err, response) => {
-        res.send(typeof(response.body) + '\n' + JSON.parse(response.body));
+        res.json(JSON.parse(response.body));
     });
 });
 
@@ -46,7 +50,7 @@ app.get('/getCards/:id', async (req, res) => {
             'Authorization': `Bearer ${authToken}`
         },
     }, (err, response) => {
-        res.send(typeof(response.body) + '\n' + JSON.stringify(response.body));
+        res.json(JSON.parse(response.body));
     });
 });
 
