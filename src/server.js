@@ -36,7 +36,7 @@ app.get('/getCards', async (req, res) => {
             'Authorization': `Bearer ${authToken}`
         },
     }, (err, response) => {
-        res.send(response.body);
+        res.send(JSON.parse(response.body));
     });
 });
 
@@ -47,12 +47,12 @@ app.get('/getCards/:id', async (req, res) => {
             'Authorization': `Bearer ${authToken}`
         },
     }, (err, response) => {
-        res.send(response.body);
+        res.send(JSON.parse(response.body));
     });
 });
 
 
-app.post('/createCard', async (req, res)=>{
+app.post('/createCard', async (req, res) => {
     const cardObject = {
         "label": req.body.label,
         "Currency": req.body.currency
@@ -64,7 +64,7 @@ app.post('/createCard', async (req, res)=>{
             'Content-Type': `application/json`
         },
         body: cardObject
-    }, (req, res)=>{
+    }, (req, res) => {
         res.send(`New card created: ${res.body.id}`);
     });
 });
