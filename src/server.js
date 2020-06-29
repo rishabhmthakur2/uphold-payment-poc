@@ -36,9 +36,21 @@ app.get('/getCards', async (req, res) => {
             'Authorization': `Bearer ${authToken}`
         },
     }, (err, response) => {
-        res.send(response);
+        res.send(response.body);
     });
 });
+
+app.get('/getCards/:id', async (req, res) => {
+    await request.get({
+        url: `https://api-sandbox.uphold.com/v0/me/cards/${req.params.id}`,
+        headers: {
+            'Authorization': `Bearer ${authToken}`
+        },
+    }, (err, response) => {
+        res.send(response.body);
+    });
+});
+
 
 app.post('/createCard', async (req, res)=>{
     const cardObject = {
@@ -56,8 +68,6 @@ app.post('/createCard', async (req, res)=>{
         res.send(`New card created: ${res.body.id}`);
     });
 });
-
-
 
 
 app.listen(process.env.PORT || PORT, () => {
