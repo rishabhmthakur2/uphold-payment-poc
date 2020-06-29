@@ -28,7 +28,7 @@ app.get('/loggedIn', async (req, res) => {
     }, (err, response) => {
         const responseJSON = JSON.parse(response.body);
         authToken = responseJSON.access_token;
-        res.send("Successfully authenticated");
+        res.send(`Successfully authenticated\nAuthToken: ${responseJSON.access_token}`);
     });
 });
 
@@ -70,6 +70,24 @@ app.post('/createCard', async (req, res) => {
         res.send(`New card created: ${res.body.id}`);
     });
 });
+
+app.post('/initiateTransaction/:id', async (req, res) => {
+    const transactionObject = {
+        "denomination": req.body.denomination,
+        "destination": req.body.destination
+    };
+    await request.post({
+        url: `https://api-sandbox.uphold.com/v0/me/cards/${req.params.id}/transactions`,
+        headers: {
+            'Authorization': `Bearer ${authToken}`,
+            'Content-Type': `application/json`
+        },
+        body: transactionObject
+    }, (req, res) => {
+        res.send(res.body);
+    });
+});
+
 
 app.listen(process.env.PORT || PORT, () => {
     console.log(`Server listing on port: ${process.env.PORT || PORT}`);
